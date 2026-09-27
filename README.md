@@ -5,7 +5,8 @@ Small `html` and `css` template tags for Preact components. `html` uses `htm/pre
 ## Install
 
 ```sh
-bun add github:ranefaunder/markup
+bun add htm preact
+bun add git+ssh://git@github.com/ranefaunder/markup.git
 ```
 
 The package uses `htm` and `preact` as peer dependencies.
