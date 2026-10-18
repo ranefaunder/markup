@@ -1,13 +1,21 @@
-# Faunder App Project Blueprint
+# Faunder Project Blueprint
 
-Use this for a new browser-based product app. It is a shared baseline derived from Abblet and Cuukbuuk; adapt it to the product instead of copying either product wholesale.
+Use this for a new browser-based app. It is a shared baseline derived from Abblet and Cuukbuuk; adapt it to the app instead of copying either project wholesale.
+
+## Project terminology
+
+- A **project** is the complete development project and its deliverables.
+- The **website** is the public marketing site.
+- The **app** is the software experience users come to use. It does not include the marketing website or documentation.
+- Use a specific term such as **built app** for applications created by a project like Abblet, so they are not confused with Abblet's own app.
+- In code, `app/` is the conventional directory for the app's browser UI.
 
 ## Default stack
 
 - Bun for runtime, scripts, package management, and the HTTP server.
 - TypeScript for server and client code.
 - Preact, `preact-iso`, `htm`, and signals for an interactive browser application.
-- Faunder UI CSS for product interfaces; use the `faunder-ui` skill. For Preact components that benefit from colocated markup and scoped CSS, use `preact-single-file-components`.
+- Faunder UI CSS for app interfaces; use the `faunder-ui` skill. For Preact components that benefit from colocated markup and scoped CSS, use `preact-single-file-components`.
 - Bun's built-in SQLite for local relational persistence when needed. Keep schema changes in ordered migrations and put SQL access in query modules; avoid adding an ORM by default.
 - `bun test` is the existing unit-test convention. Add or use tests where appropriate to the app; do not create placeholder suites.
 
@@ -50,13 +58,13 @@ utils/
 ops/                      # deployment, backups, or maintenance commands
 ```
 
-For a Preact product app, the usual feature-oriented shape is:
+For a Preact app, the usual feature-oriented shape is:
 
 ```text
 app/
   App.ts                  # client entry and route composition
-  Layout.ts                # shared product shell
-  components/<feature>/    # views and UI grouped by product area
+  Layout.ts                # shared app shell
+  components/<feature>/    # views and UI grouped by app area
   lib/                     # client-side helpers
   stores/                  # shared client state
 utils/
@@ -79,11 +87,11 @@ Keep responsibilities clear:
 - `server/api/` owns HTTP API handlers; `server/routes/` owns HTTP page and static-file routing; `server/services/` owns reusable domain operations. Keep the app page/SSR handler and static-file handler in separate route modules (for example, `server/routes/app.ts` and `server/routes/static.ts`) and register them from `server/server.ts`.
 - `server/database/migrations/` changes the schema; `server/database/queries/` is the persistence boundary for application code.
 - `i18n/`, `static/`, `test/`, `types/`, `utils/`, and `ops/` are added when they have real content. Avoid empty placeholder directories.
-- Keep product rules out of generic helpers and HTTP route handlers where a domain service or query module is a better boundary.
+- Keep app-domain rules out of generic helpers and HTTP route handlers where a domain service or query module is a better boundary.
 
 ## Development integration with the Faunder repository
 
-The Faunder repository is a workspace and tools repository, not an app monorepo. Product repos are independent checkouts under `apps/`, which the parent repo excludes from tracking.
+The Faunder repository is a workspace and tools repository, not an app monorepo. Product repos are independent checkouts under `projects/`, which the parent repo excludes from tracking.
 
 For each new app:
 
@@ -99,7 +107,7 @@ Local DNS, certificate issuance, deployment, credentials, and public reachabilit
 
 Do not add features just because one reference project has them:
 
-- Abblet's generated-app runtime, SDK, AI platform, billing, and runtime-origin security exist for Abblet's product model.
+- Abblet's generated-app runtime, SDK, AI platform, billing, and runtime-origin security exist for Abblet's app model.
 - Cuukbuuk's recipe, book, and library domains exist for Cuukbuuk.
 - Authentication, PWA support, uploads, AI services, background workers, analytics, email, and deployment scripts are optional capabilities. Add each only when the new app needs it.
 - A library, CLI, internal tool, or static site may need a smaller or different architecture; do not force the full web-app baseline on it. The app-level skill is distributed to these repos for shared guidance, but this browser-app shape applies only when it fits.
