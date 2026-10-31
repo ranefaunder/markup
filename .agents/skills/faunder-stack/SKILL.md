@@ -33,3 +33,9 @@ This skill defines shared Faunder application architecture and development conve
 ## Existing app work
 
 When asked to change an existing app's architecture, first inspect that app's own repository and preserve its current conventions. Use the blueprint to explain or coordinate cross-project conventions; do not rewrite an app to match it mechanically. The blueprint is primarily for browser apps; CLI tools, component libraries, and static sites may need different structures.
+
+## Browser testing
+
+Use Bun’s built-in WebView with the macOS WebKit backend for browser tests and
+screenshot scripts; see the [blueprint default stack](references/project-blueprint.md#default-stack).
+Keep test servers, databases and browser storage isolated from running apps.

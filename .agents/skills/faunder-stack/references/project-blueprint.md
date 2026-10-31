@@ -17,7 +17,7 @@ Use this for a new browser-based app. It is a shared baseline derived from Abble
 - Preact, `preact-iso`, `htm`, and signals for an interactive browser application.
 - Faunder UI CSS for app interfaces; use the `faunder-ui` skill. For Preact components that benefit from colocated markup and scoped CSS, use `preact-single-file-components`.
 - Bun's built-in SQLite for local relational persistence when needed. Keep schema changes in ordered migrations and put SQL access in query modules; avoid adding an ORM by default.
-- `bun test` is the existing unit-test convention. Add or use tests where appropriate to the app; do not create placeholder suites.
+- `bun test` is the unit-test convention. Existing browser suites and screenshot scripts use Bun 1.4.2+ `Bun.WebView({ backend: "webkit", dataStore: "ephemeral" })` on macOS. Keep browser automation out of production bundles; do not add Playwright or downloaded browser runtimes. WebKit is macOS-only: do not silently switch test engines on Linux/Windows. Use isolated test servers and databases, clean up owned processes/views, and run tests only when requested. Preserve any existing production-only browser requirements separately.
 
 Prefer the current compatible dependency versions in the new app's own lockfile rather than copying old pinned versions from another project.
 
